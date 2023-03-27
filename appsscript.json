@@ -1,0 +1,29 @@
+{
+  "timeZone": "America/New_York",
+  "dependencies": {
+    "enabledAdvancedServices": [{
+      "userSymbol": "AnalyticsData",
+      "serviceId": "analyticsdata",
+      "version": "v1beta"
+    }, {
+      "userSymbol": "AnalyticsReporting",
+      "serviceId": "analyticsreporting",
+      "version": "v4"
+    }, {
+      "userSymbol": "Drive",
+      "serviceId": "drive",
+      "version": "v2"
+    }, {
+      "userSymbol": "AnalyticsAdmin",
+      "serviceId": "analyticsadmin",
+      "version": "v1alpha"
+    }, {
+      "userSymbol": "Analytics",
+      "serviceId": "analytics",
+      "version": "v3"
+    }]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "oauthScopes": ["https://www.googleapis.com/auth/analytics.readonly", "https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/script.external_request", "https://www.googleapis.com/auth/analytics.edit", "https://www.googleapis.com/auth/documents", "https://www.googleapis.com/auth/analytics.manage.users", "https://www.googleapis.com/auth/drive", "https://www.googleapis.com/auth/presentations"],
+  "runtimeVersion": "V8"
+}

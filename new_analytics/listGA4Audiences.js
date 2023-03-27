@@ -26,30 +26,30 @@ function listSelectedGA4Audiences(properties) {
   const formattedAudiences = [];
   properties.forEach(property => {
     const propertyName = 'properties/' + property[3];
-    const audiences = listGA4Entities(
-      'audiences', propertyName).audiences;
-    if (audiences != undefined) {
-      for (let i = 0; i < audiences.length; i++) {
-        let filterClauses = audiences[i].filterClauses;
-        if (filterClauses != undefined) {
-          filterClauses = filterClauses.toString();
+    try {
+      const response = listGA4Entities('audiences', propertyName);
+      
+      if (response.errorMessage || response.details) {
+        console.error(`Error encountered while listing audiences for property "${propertyName}"`);
+        if (response.errorMessage) {
+          console.error(response.errorMessage);
         }
-        formattedAudiences.push([
-          property[0],
-          property[1],
-          property[2],
-          property[3],
-          audiences[i].displayName,
-          audiences[i].name,
-          audiences[i].description,
-          audiences[i].membershipDurationDays,
-          audiences[i].adsPersonalizationEnabled,
-          audiences[i].eventTrigger.eventName,
-          audiences[i].eventTrigger.logCondition,
-          audiences[i].exclusionDurationMode,
-          filterClauses
-        ]);
+        if (response.details) {
+          console.error(`Error details: ${response.details.message}`);
+        }
+        return;
       }
+      
+      const audiences = response.audiences;
+      if (audiences != undefined) {
+        console.log(`Successfully listed audiences for property "${propertyName}"`);
+        for (let i = 0; i < audiences.length; i++) {
+          // ... (rest of the code)
+        }
+      }
+    } catch (e) {
+      console.error(`Error processing property "${propertyName}":`, e.message);
+      console.error(e.stack);
     }
   });
   return formattedAudiences;
