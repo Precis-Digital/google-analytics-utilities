@@ -43,8 +43,26 @@ function listSelectedGA4Audiences(properties) {
       const audiences = response.audiences;
       if (audiences != undefined) {
         console.log(`Successfully listed audiences for property "${propertyName}"`);
-        for (let i = 0; i < audiences.length; i++) {
-          // ... (rest of the code)
+      for (let i = 0; i < audiences.length; i++) {
+          let filterClauses = audiences[i].filterClauses;
+          if (filterClauses != undefined) {
+            filterClauses = filterClauses.toString();
+          }
+          formattedAudiences.push([
+            property[0],
+            property[1],
+            property[2],
+            property[3],
+            audiences[i].displayName,
+            audiences[i].name,
+            audiences[i].description,
+            audiences[i].membershipDurationDays,
+            audiences[i].adsPersonalizationEnabled,
+            audiences[i].eventTrigger.eventName,
+            audiences[i].eventTrigger.logCondition,
+            audiences[i].exclusionDurationMode,
+            filterClauses
+          ]);
         }
       }
     } catch (e) {
